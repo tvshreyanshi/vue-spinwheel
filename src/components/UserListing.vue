@@ -3,20 +3,20 @@
     <table class="table user-table mb-4 bg-secondary">
       <thead class="px-4">
         <tr class="d-block">
-          <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4 w-3/4 d-inline-block">User Name</th>
-          <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4 w-1/4 d-inline-block">Euro</th>
+          <th class="font-bold text-black border-0 text-md font-bolder text-capitalize py-0 px-4 w-3/4 d-inline-block">User Name</th>
+          <th class="font-bold text-black border-0 text-md font-bolder text-capitalize py-0 px-4 w-1/4 d-inline-block">Euro</th>
         </tr>
       </thead>
       <tbody class="px-4">
         <tr class="rounded-3" v-for="(user, index) in gameUserList" v-bind:key="index">
-          <td class="py-2 border-0 text-white text-base font-bolder text-capitalize rounded-start-3 w-3/4 d-inline-block text-wrap">{{ user.name }}</td>
-          <td class="py-2 d-inline-block border-0 text-white text-base font-bolder text-capitalize rounded-end-3 w-1/4 d-inline-block">{{ user.point }}</td>
+          <td class="py-2 border-0 text-black text-base font-bolder text-capitalize rounded-start-3 w-3/4 d-inline-block text-wrap">{{ user.name }}</td>
+          <td class="py-2 d-inline-block border-0 text-black text-base font-bolder text-capitalize rounded-end-3 w-1/4 d-inline-block">{{ user.point }}</td>
         </tr>
       </tbody>
     </table>
     <div class="text-center">
       <!-- Button to open modal -->
-      <button type="button" class="btn btn-primary" @click="showModal = true">
+      <button type="button" class="border-0 btn text-black font-bolder" @click="showModal = true">
         Add User
       </button>
     </div>
@@ -33,9 +33,9 @@
           </div>
           <div class="modal-body">
             <div class="modal-body">
-              <label class="form-label" for="username">User name:</label>
+              <!-- <label class="form-label" for="username">User name:</label> -->
               <input class="form-control mb-6 border-0" type="text" v-model="username"/>
-              <input class="btn-primary btn" type="submit" value="Submit" @click="addUserInArray">
+              <input class="btn-primary border-0 btn text-black font-bolder" type="submit" value="Submit" @click="addUserInArray">
             </div>
           </div>
         </div>
@@ -165,6 +165,10 @@ tr:nth-child(even) {
   z-index: 9999;
 }
 .modal .modal-dialog-centered input {
+  background-color: #f0a71c;
+  box-shadow: inset 0px 0px 20px #8a5306;
+}
+.btn, .btn:hover {
   background-color: #f0a71c;
   box-shadow: inset 0px 0px 20px #8a5306;
 }
