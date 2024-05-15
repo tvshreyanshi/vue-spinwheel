@@ -90,7 +90,7 @@ export default {
     ...mapMutations(["addUser", "UpdateUserPoint", "decrementUserPoints"]),
     closeModal() {
       this.showModal = false;
-      this.timeLeft = 15;
+      clearInterval(this.timer);
     },
     closeWinnerModal() {
       this.showWinningModal = false;
@@ -127,7 +127,7 @@ export default {
     onRotateEnd (prize) {
       this.lotteryNumber = prize.id;
       this.showWinningModal = true;
-      this.calculation(prize.id)
+      this.calculation(prize.id);
     },
     calculation(prize) {
       const winnerIndex = this.selectedValue.findIndex(i => i == prize.toString());
@@ -138,6 +138,7 @@ export default {
       this.selectedValue = [];
     },
     startTimer() {
+      this.timeLeft = 15;
       const interval = 1000;
       const timer = setInterval(() => {
         if (this.timeLeft > 0) {
