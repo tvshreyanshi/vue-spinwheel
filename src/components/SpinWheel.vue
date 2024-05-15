@@ -23,7 +23,7 @@
               <div v-for="(data, index) in eligibleUser" :key="index">
                 <div class="input-group mb-3 shadow-none">
                   <span class="input-group-text border border-primary w-3/4 border-0" id="basic-addon1">{{ data.name }}</span>
-                  <input type="text" class="form-control border-primary border-0" v-model="selectedValue[index]">
+                  <input type="text" class="form-control border-primary border-0 select-value-input" v-model="selectedValue[index]">
                 </div>
               </div>
               <input class="btn btn-primary border-0 text-black font-bolder" type="submit" value="Submit" @click="addUserAndRotate">
@@ -145,7 +145,7 @@ export default {
           this.timeLeft--;
         } else {
           clearInterval(timer);
-          this.closeModal(); 
+          //this.closeModal(); 
         }
       }, interval);
     },
@@ -211,5 +211,8 @@ export default {
 .modal .modal-dialog-centered input {
   background-color: #f0a71c;
   box-shadow: inset -10px 0px 20px #8a5306;
+}
+.modal .modal-dialog-centered input.select-value-input {
+  box-shadow: inset 7px 0px 20px #8a5306;
 }
 </style>

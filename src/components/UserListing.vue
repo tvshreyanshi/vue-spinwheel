@@ -16,8 +16,11 @@
     </table>
     <div class="text-center">
       <!-- Button to open modal -->
-      <button type="button" class="border-0 btn text-black font-bolder" @click="showModal = true">
+      <button type="button" class="border-0 btn text-black font-bolder mx-2" @click="showModal = true">
         Add User
+      </button>
+      <button type="button" class="border-0 btn text-black font-bolder" @click="resetGamePoints">
+        Reset Game Point
       </button>
     </div>
 
@@ -60,7 +63,7 @@ export default {
     ...mapState(["gameUserList"])
   },
   methods: {
-    ...mapMutations(["addUser"]),
+    ...mapMutations(["addUser", "ResetGamePoints"]),
     closeModal() {
       this.showModal = false;
     },
@@ -85,6 +88,9 @@ export default {
         }
       }
       return false;
+    },
+    resetGamePoints() {
+      this.ResetGamePoints(this.gameUserList);
     }
   },
   // watch: {
