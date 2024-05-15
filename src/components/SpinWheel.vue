@@ -9,9 +9,9 @@
       @rotateStart="onCanvasRotateStart"
       @rotateEnd="onRotateEnd"
       class="spinn-wheel"
-      data-bs-toggle="modal" data-bs-target="#spinWheel"
+      @click="showModal = true"
     />
-    <div class="modal fade" id="spinWheel" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" :class="{ show: showModal }" style="display: block;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="showModal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -80,7 +80,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(["gameUserList"])
+    ...mapState(["gameUserList"]),
+    getGameUserData() {
+      return this.gameUserList && this.gameUserList.filter((user) => user.point > 0)
+    }
   },
   methods: {
     ...mapMutations(["addUser", "UpdateUserPoint", "decrementUserPoints"]),
@@ -126,6 +129,7 @@ export default {
         console.log('username in spinwheel');
         this.UpdateUserPoint(username);
       }
+      this.selectedValue = [];
       // console.log('winner',);
     }
   },

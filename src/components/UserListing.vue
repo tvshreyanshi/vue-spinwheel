@@ -14,17 +14,23 @@
           </tr>
         </tbody>
       </table>
-      <div style="text-align: center;">
-        <button class="add-user-btn btn btn-primary mt-4" @click="openAddUserModal" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button>
-      </div>
+      <div>
+    <!-- Button to open modal -->
+    <button type="button" class="btn btn-primary" @click="showModal = true">
+      Add User
+    </button>
 
-      <div class="modal fade" id="addUser" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title fs-5">Add User</h3>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" :class="{ show: showModal }" style="display: block;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="showModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button type="button" class="close" @click="closeModal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
             <div class="modal-body">
               <label class="form-label" for="username">User name:</label>
               <input class="form-control mb-6 border border-black" type="text" v-model="username"/>
@@ -33,17 +39,10 @@
           </div>
         </div>
       </div>
-      
-      <!-- <div v-if="isModleOpen" class="user-add-modal-popup">
-        <div class="modal-content">
-          <span class="close" @click="closeAddUserModal">&times;</span>
-          <h3>Add User</h3>
-          <hr />
-          <label for="username">User name:</label>
-          <input type="text" v-model="username" style="margin-left: 10px;" />
-          <input type="submit" value="Submit" @click="addUserInArray">
-        </div>
-      </div> -->
+      <!-- Backdrop -->
+      <div class="modal-backdrop fade show" v-if="showModal"></div>
+    </div>
+  </div>
     </div>
 </template>
 <script>
@@ -52,8 +51,9 @@ export default {
     name: 'UserListing',
   data() {
     return {
-      isModleOpen: false,
+      isModleOpen: 'modal',
       username: null,
+      showModal: false
     };
   },
   computed: {
@@ -61,14 +61,10 @@ export default {
   },
   methods: {
     ...mapMutations(["addUser"]),
-    openAddUserModal() {
-      this.isModleOpen = true;
-    },
-    closeAddUserModal() {
-      this.isModleOpen = false;
+    closeModal() {
+      this.showModal = false;
     },
     addUserInArray() {
-      this.isModleOpen = false;
       if(this.username && !this.checkUserExists(this.username, this.gameUserList)) {
         const user = {
             name: this.username,
@@ -76,6 +72,7 @@ export default {
         };
         this.addUser(user);
         this.username = null;
+        this.showModal = false;
       }
     },
     updateUserPoints(username, points) {
@@ -142,5 +139,15 @@ tr:nth-child(even) {
   border-radius: 16px;
   padding: 16px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.modal {
+  display: none;
+}
+.modal.show {
+  display: block;
+  padding-right: 17px; /* Adjust for scrollbar */
+}
+.modal-dialog {
+  z-index: 9999;
 }
 </style>
