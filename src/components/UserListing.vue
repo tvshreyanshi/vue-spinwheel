@@ -1,39 +1,40 @@
 <template>
-   <div class="user-list-section table-responsive">
-      <table class="table bg-secondary user-table">
-        <thead>
-          <tr>
-            <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4">User Name</th>
-            <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4">Euro</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="rounded-3" v-for="(user, index) in gameUserList" v-bind:key="index">
-            <td class="py-2 border-0 text-white text-base font-bolder text-capitalize rounded-start-3">{{ user.name }}</td>
-            <td class="py-2 border-0 text-white text-base font-bolder text-capitalize rounded-end-3">{{ user.point }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-    <!-- Button to open modal -->
-    <button type="button" class="btn btn-primary" @click="showModal = true">
-      Add User
-    </button>
+  <div class="user-list-section table-responsive">
+    <table class="table user-table mb-4 bg-secondary">
+      <thead class="px-4">
+        <tr class="d-block">
+          <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4 w-3/4 d-inline-block">User Name</th>
+          <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4 w-1/4 d-inline-block">Euro</th>
+        </tr>
+      </thead>
+      <tbody class="px-4">
+        <tr class="rounded-3" v-for="(user, index) in gameUserList" v-bind:key="index">
+          <td class="py-2 border-0 text-white text-base font-bolder text-capitalize rounded-start-3 w-3/4 d-inline-block text-wrap">{{ user.name }}</td>
+          <td class="py-2 d-inline-block border-0 text-white text-base font-bolder text-capitalize rounded-end-3 w-1/4 d-inline-block">{{ user.point }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <!-- Button to open modal -->
+      <button type="button" class="btn btn-primary" @click="showModal = true">
+        Add User
+      </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" :class="{ show: showModal }" style="display: block;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="showModal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-secondary">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-            <button type="button" class="close" @click="closeModal" aria-label="Close">
+            <button type="button" class="close bg-transparent" @click="closeModal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="modal-body">
               <label class="form-label" for="username">User name:</label>
-              <input class="form-control mb-6 border border-black" type="text" v-model="username"/>
+              <input class="form-control mb-6 border-0" type="text" v-model="username"/>
               <input class="btn-primary btn" type="submit" value="Submit" @click="addUserInArray">
             </div>
           </div>
@@ -43,7 +44,6 @@
       <div class="modal-backdrop fade show" v-if="showModal"></div>
     </div>
   </div>
-    </div>
 </template>
 <script>
 import { mapMutations, mapState } from 'vuex';
@@ -116,29 +116,43 @@ tr:nth-child(even) {
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.user-table > thead {
+  display: block;
+  padding: 12px 0;
+}
+.user-table > tbody {
+  overflow-y: scroll;
+  max-height: 500px;
+  display: block;
+}
+.user-table > tbody::-webkit-scrollbar {
+  background: transparent;
+  width: 0;
+  height: 5px;
+}
+.user-table > tbody::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+.user-table > tbody{
+  scrollbar-width: none;
+  scrollbar-color: gray transparent;
 }
 .user-table tbody > tr {
   background-color: #f0a71c;
   box-shadow: inset 0px 0px 20px #8a5306;
+  min-width: 100%;
+  display: inline-block;
+  margin-bottom: 12px;
 }
 .user-table {
-  border-collapse: separate;
-  border-spacing: 0 12px;
   background-color: #f5d02d;
   border-radius: 16px;
-  padding: 16px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: block;
 }
 .modal {
   display: none;
@@ -149,5 +163,9 @@ tr:nth-child(even) {
 }
 .modal-dialog {
   z-index: 9999;
+}
+.modal .modal-dialog-centered input {
+  background-color: #f0a71c;
+  box-shadow: inset 0px 0px 20px #8a5306;
 }
 </style>

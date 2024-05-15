@@ -2,7 +2,7 @@
   <div>
     <!-- type: canvas -->
     <FortuneWheel
-      style="width: 500px; max-width: 100%;"
+      style="width: 550px; max-width: 100%;"
       :verify="verify"
       :canvas="options"
       :prizes="prizes"
@@ -13,16 +13,16 @@
     />
     <div class="modal fade" :class="{ show: showModal }" style="display: block;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="showModal">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-secondary">
           <div class="modal-header">
-            <h3 class="modal-title fs-5">Select your Lottery Number</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- <h3 class="modal-title fs-5">Select your Lottery Number</h3> -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal" ></button>
           </div>
           <div class="modal-body">
             <div v-if="gameUserList && gameUserList.length > 0">
-              <h5 class="mb-4 text-start">User name:</h5>
+              <!-- <h5 class="mb-4 text-start">User name:</h5> -->
               <div v-for="(data, index) in gameUserList" :key="index">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 shadow-none">
                   <span class="input-group-text border border-primary w-3/4" id="basic-addon1">{{ data.name }}</span>
                   <input type="text" class="form-control border-primary" v-model="selectedValue[index]">
                 </div>
@@ -67,9 +67,9 @@ export default {
     return {
       options: {
         btnWidth: 140,
-        borderColor: '#584b43',
-        borderWidth: 6,
-        lineHeight: 30
+        borderColor: '#1f1d2b',
+        borderWidth: 20,
+        lineHeight: 30,
       },
       verifyDuration: 2,
       verify: true,
@@ -87,6 +87,9 @@ export default {
   },
   methods: {
     ...mapMutations(["addUser", "UpdateUserPoint", "decrementUserPoints"]),
+    closeModal() {
+      this.showModal = false;
+    },
     onCanvasRotateStart (rotate) {
       this.showModal = true;
       this.rotate = rotate;
@@ -155,9 +158,44 @@ export default {
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   cursor: pointer;
+  line-height: 1;
+}
+.fw-wheel:before {
+  content: "";
+  height: calc(100% + 20px);
+  position: absolute;
+  width: calc(100% + 20px);
+  border: 20px solid #dbeaf2;
+  border-radius: 50%;
+  left: -10px;
+  top: -10px;
+}
+.fw-wheel:after {
+  content: "";
+  height: calc(100% + 40px);
+  position: absolute;
+  width: calc(100% + 40px);
+  border: 10px solid #3c3a58;
+  border-radius: 50%;
+  left: -20px;
+  top: -20px;
+}
+.fw-container.spinn-wheel {
+  overflow: visible;
+}
+.modal .modal-dialog-centered .input-group .input-group-text{
+  background-color: #f0a71c;
+  box-shadow: inset 10px 0px 20px #8a5306;
+  font-size: 18px;
+  color: black;
+  font-weight: 600;
+}
+.modal .modal-dialog-centered input:focus {
+  box-shadow: inset -10px 0px 20px #8a5306;
+}
+.modal .modal-dialog-centered input {
+  background-color: #f0a71c;
+  box-shadow: inset -10px 0px 20px #8a5306;
 }
 </style>
