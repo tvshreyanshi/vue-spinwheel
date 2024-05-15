@@ -1,0 +1,85 @@
+{
+  "prizes":[
+    {
+      "id": 1,
+      "name": "1",
+      "value": "Number is 1",
+      "bgColor": "#45ace9",
+      "color": "#ffffff",
+      "probability": 10,
+      "innerShadow": "inset rgba(60, 70, 85, 0.5) 0px 0px 40px 0px, inset rgba(60, 70, 85, 0.5) 0px 0px 40px 0px, inset rgba(0, 0, 0, 1) 0px 0px 36px -24px;"
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "value": "Number is 2",
+      "bgColor": "#dd3832",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 3,
+      "name": "3",
+      "value": "Number is 3",
+      "bgColor": "#fef151",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 4,
+      "name": "4",
+      "value": "Number is 4",
+      "bgColor": "#008000",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 5,
+      "name": "5",
+      "value": "Number is 5",
+      "bgColor": "#FF8C00",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 6,
+      "name": "6",
+      "value": "Number is 6",
+      "bgColor": "#FFC0CB",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 7,
+      "name": "7",
+      "value": "Number is 7",
+      "bgColor": "#7F00FF",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 8,
+      "name": "8",
+      "value": "Number is 8",
+      "bgColor": "#686868",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 9,
+      "name": "9",
+      "value": "Number is 9",
+      "bgColor": "#814141",
+      "color": "#ffffff",
+      "probability": 10
+    },
+    {
+      "id": 10,
+      "name": "10",
+      "value": "Number is 10",
+      "bgColor": "#12AD2B",
+      "color": "#ffffff",
+      "probability": 10
+    }
+  ]
+}
