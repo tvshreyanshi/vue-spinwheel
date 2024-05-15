@@ -25,7 +25,7 @@ export default {
 </script>
 <style>
 #app {
-  background: url('../assets/Image/spinwheel-background.png');
+  background: url('../assets/Image/spinwheel-background.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

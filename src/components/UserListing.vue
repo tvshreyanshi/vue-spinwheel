@@ -1,16 +1,16 @@
 <template>
    <div class="user-list-section table-responsive">
-      <table class="table bg-secondary">
+      <table class="table bg-secondary user-table">
         <thead>
           <tr>
-            <th class="font-bold text-black">User Name</th>
-            <th class="font-bold text-black">Euro</th>
+            <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4">User Name</th>
+            <th class="font-bold text-white border-0 text-md font-bolder text-capitalize py-0 px-4">Euro</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in gameUserList" v-bind:key="index">
-            <td class="py-2">{{ user.name }}</td>
-            <td class="py-2">{{ user.point }}</td>
+          <tr class="rounded-3" v-for="(user, index) in gameUserList" v-bind:key="index">
+            <td class="py-2 border-0 text-white text-base font-bolder text-capitalize rounded-start-3">{{ user.name }}</td>
+            <td class="py-2 border-0 text-white text-base font-bolder text-capitalize rounded-end-3">{{ user.point }}</td>
           </tr>
         </tbody>
       </table>
@@ -130,5 +130,17 @@ tr:nth-child(even) {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+.user-table tbody > tr {
+  background-color: #f0a71c;
+  box-shadow: inset 0px 0px 20px #8a5306;
+}
+.user-table {
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  background-color: #f5d02d;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 </style>
