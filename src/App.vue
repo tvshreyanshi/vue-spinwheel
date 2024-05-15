@@ -1,9 +1,9 @@
 <template>
-  <div class="game-section  row h-screen align-items-center m-0">
-    <div class="wheel-section col-sm-8">
+  <div class="game-section row align-items-center m-0 gy-lg-0 gy-5 h-full">
+    <div class="wheel-section col-lg-8">
       <SpinWheel class="text-center"/>
     </div>
-    <div class="col-sm-4 h-full pt-4">
+    <div class="col-lg-4 h-full pt-4 pb-lg-0 pb-4">
       <UserListing />
     </div>
   </div>
@@ -25,10 +25,11 @@ export default {
 </script>
 <style>
 #app {
-  background: url('../assets/Image/spinwheel-background.png');
+  background: url('../assets/Image/spinwheel-background.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  background-attachment:fixed;
 }
 </style>
 

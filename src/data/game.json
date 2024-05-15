@@ -4,16 +4,16 @@
       "id": 1,
       "name": "1",
       "value": "Number is 1",
-      "bgColor": "#45ace9",
+      "bgColor": "#67FF7D",
       "color": "#ffffff",
       "probability": 10,
-      "innerShadow": "inset rgba(60, 70, 85, 0.5) 0px 0px 40px 0px, inset rgba(60, 70, 85, 0.5) 0px 0px 40px 0px, inset rgba(0, 0, 0, 1) 0px 0px 36px -24px;"
+      "outerShadow": "inset rgba(60, 70, 85, 0.5) 0px 0px 40px 0px, inset rgba(60, 70, 85, 0.5) 0px 0px 40px 0px, inset rgba(0, 0, 0, 1) 0px 0px 36px -24px;"
     },
     {
       "id": 2,
       "name": "2",
       "value": "Number is 2",
-      "bgColor": "#dd3832",
+      "bgColor": "#FFD15B",
       "color": "#ffffff",
       "probability": 10
     },
@@ -21,7 +21,7 @@
       "id": 3,
       "name": "3",
       "value": "Number is 3",
-      "bgColor": "#fef151",
+      "bgColor": "#FC844F",
       "color": "#ffffff",
       "probability": 10
     },
@@ -29,7 +29,7 @@
       "id": 4,
       "name": "4",
       "value": "Number is 4",
-      "bgColor": "#008000",
+      "bgColor": "#FF476A",
       "color": "#ffffff",
       "probability": 10
     },
@@ -37,7 +37,7 @@
       "id": 5,
       "name": "5",
       "value": "Number is 5",
-      "bgColor": "#FF8C00",
+      "bgColor": "#DA6DAB",
       "color": "#ffffff",
       "probability": 10
     },
@@ -45,7 +45,7 @@
       "id": 6,
       "name": "6",
       "value": "Number is 6",
-      "bgColor": "#FFC0CB",
+      "bgColor": "#D67FFF ",
       "color": "#ffffff",
       "probability": 10
     },
@@ -61,7 +61,7 @@
       "id": 8,
       "name": "8",
       "value": "Number is 8",
-      "bgColor": "#686868",
+      "bgColor": "#009AF9",
       "color": "#ffffff",
       "probability": 10
     },
@@ -69,7 +69,7 @@
       "id": 9,
       "name": "9",
       "value": "Number is 9",
-      "bgColor": "#814141",
+      "bgColor": "#1AD7FE",
       "color": "#ffffff",
       "probability": 10
     },
