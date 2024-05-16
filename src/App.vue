@@ -1,5 +1,5 @@
 <template>
-  <div class="game-section row align-items-center m-0 gy-lg-0 gy-5 h-full">
+ <div class="game-section row align-items-center m-0 gy-lg-0 gy-5 h-full">
     <div class="wheel-section col-lg-8">
       <SpinWheel class="text-center"/>
     </div>
@@ -9,23 +9,22 @@
   </div>
 </template>
 
-
-
 <script>
-import SpinWheel from './components/SpinWheel.vue';
+import { defineComponent } from 'vue';
 import UserListing from './components/UserListing.vue';
+import SpinWheel from './components/SpinWheel.vue';
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
+    UserListing,
     SpinWheel,
-    UserListing
   },
-}
+})
 </script>
 <style>
 #app {
-  background: url('../assets/Image/spinwheel-background.jpg');
+  background: url('../src/assets/Image/spinwheel-background.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
