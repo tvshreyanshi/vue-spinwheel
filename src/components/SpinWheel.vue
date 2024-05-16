@@ -90,21 +90,27 @@
         </div>
       </div>
     </div>
+    <WinnerModal v-model:visible="winnerVisible" />
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
+import * as PIXI from 'pixi.js';
 import FortuneWheel from "vue-fortune-wheel";
 import "vue-fortune-wheel/style.css";
 import gameData from "../data/game.json";
 import store from "../store/index";
+import WinnerModal from './WinnerModal.vue';
+import { gsap } from 'gsap';
 
+const pixiContainer = ref<HTMLDivElement | null>(null);
+const pixiApp = ref<PIXI.Application>();
+const winnerVisible = ref(false);
 const verify = ref(true);
 const prizes = gameData.prizes;
 const showModal = ref(false);
 const selectedValue = ref([]);
 const timer = ref<number | undefined>(undefined);
-let timeLeft = ref(15);
 const showWinningModal = ref(false);
 const lotteryNumber = ref("");
 const verifyDuration = 2;
@@ -115,6 +121,7 @@ const options = {
   borderWidth: 20,
   lineHeight: 30,
 };
+let timeLeft = ref(15);
 const gameUserList = computed(() => store.state.gameUserList);
 
 const eligibleUser = computed(() => {
@@ -157,20 +164,21 @@ const spinDelayRequest = (verified: any, duration: any) => {
   });
 };
 const onRotateEnd = (prize: any) => {
-  lotteryNumber.value = prize.id;
-  showWinningModal.value = true;
+  //lotteryNumber.value = prize.id;
+  //showWinningModal.value = true;
   calculation(prize.id);
 };
 const calculation = (prize: any) => {
-  const winnerIndex = selectedValue.value.findIndex(
-    (i) => i == prize.toString()
-  );
-  if (winnerIndex != -1) {
-    const username =
-      eligibleUser.value[winnerIndex] && eligibleUser.value[winnerIndex].name;
-    store.commit("UpdateUserPoint", username);
-  }
-  selectedValue.value = [];
+  winnerVisible.value = true;
+  showWinnerAnimation();
+  // const winnerIndex = selectedValue.value.findIndex(
+  //   (i) => i == prize.toString()
+  // );
+  // if (winnerIndex != -1) {
+  //   const username = eligibleUser.value[winnerIndex] && eligibleUser.value[winnerIndex].name;
+  //   store.commit("UpdateUserPoint", username);
+  // }
+  // selectedValue.value = [];
 };
 const startTimer = () => {
   const interval = 1000;
@@ -184,6 +192,67 @@ const startTimer = () => {
   }, interval);
   timeLeft.value = 15;
 };
+
+const showWinnerAnimation = () => {
+  if (pixiApp.value) {
+    const graphics = new PIXI.Graphics();
+    graphics.beginFill(0xffd700);
+    graphics.drawStar(400, 300, 5, 100, 50);
+    graphics.endFill();
+    pixiApp.value.stage.addChild(graphics);
+    
+    // Animate the star graphic
+    gsap.fromTo(graphics, 
+      { alpha: 0, scale: 0 }, 
+      { alpha: 1, scale: 1, duration: 1, ease: "elastic.out(1, 0.3)" }
+    );
+    
+    // Add celebratory particles
+    const particles = new PIXI.ParticleContainer(1000, {
+      scale: true,
+      position: true,
+      rotation: true,
+      uvs: true,
+      alpha: true,
+    });
+    pixiApp.value.stage.addChild(particles);
+
+    for (let i = 0; i < 100; i++) {
+      const particle = new PIXI.Sprite.from(PIXI.Texture.WHITE);
+      particle.tint = Math.random() * 0xFFFFFF;
+      particle.x = 400;
+      particle.y = 300;
+      particle.alpha = 0.6;
+      particle.anchor.set(0.5);
+      particle.scale.set(Math.random() * 0.5);
+      particles.addChild(particle);
+
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 4 + 2;
+      gsap.fromTo(
+        particle,
+        { alpha: 0 },
+        {
+          alpha: 1,
+          x: 400 + Math.cos(angle) * speed * 50,
+          y: 300 + Math.sin(angle) * speed * 50,
+          duration: 2,
+          ease: "power1.out",
+          repeat: -1,
+          repeatDelay: 2,
+        }
+      );
+    }
+  }
+};
+
+onMounted(() => {
+  if (pixiContainer.value) {
+    pixiApp.value = new PIXI.Application({ width: 800, height: 600 });
+    pixiContainer.value.appendChild(pixiApp.value.view);
+  }
+});
+
 </script>
 <style>
 /* CSS for modal */
