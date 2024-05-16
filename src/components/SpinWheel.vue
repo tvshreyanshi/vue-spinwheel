@@ -18,7 +18,7 @@
       role="dialog"
       aria-labelledby="lotteryModalLabel"
       aria-hidden="true"
-      v-if="showModal && eligibleUser && eligibleUser.length > 1"
+      v-if="showModal && eligibleUser && eligibleUser.length > 0"
     >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-secondary">
@@ -182,6 +182,7 @@ const startTimer = () => {
       closeModal();
     }
   }, interval);
+  timeLeft.value = 15;
 };
 </script>
 <style>
