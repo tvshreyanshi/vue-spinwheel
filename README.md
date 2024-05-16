@@ -1,4 +1,9 @@
-# vue-app
+# vue-spinwheel
+
+## Git Repository Setup
+```
+Git Clone <GIT-REPOSITORY-URL> vue-spinwheel
+```
 
 ## Project setup
 ```
@@ -9,16 +14,7 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+## Dependenies 
 ```
-npm run build
+node v17.7.1
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

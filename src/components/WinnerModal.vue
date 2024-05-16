@@ -5,13 +5,13 @@
         <h1 ref="el => animatedText.value[0] = el">🎉 Congratulations!</h1>
         <button @click="closeModal" class="close-button">Close</button>
       </div>
-      <div class="pixi-container" ref="pixiContainer"></div>
     </div>
+    <div class="pixi-container" ref="pixiContainer"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, nextTick, onMounted } from 'vue';
+import { defineComponent, ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
 import { gsap } from 'gsap';
 import * as PIXI from 'pixi.js';
 
@@ -47,9 +47,8 @@ export default defineComponent({
     const createParticles = () => {
       if (particleTexture.value && app.value) {
         for (let i = 0; i < 200; i++) {
-          const particle = new PIXI.Sprite(particleTexture.value);
+          const particle = new PIXI.Sprite(particleTexture.value as PIXI.Texture);
           particle.anchor.set(0.5);
-          particle.visible = true; // Set to visible by default
           particles.value.push(particle);
           app.value.stage.addChild(particle);
         }
@@ -57,9 +56,9 @@ export default defineComponent({
     };
 
     const showParticles = () => {
-      particles.value.forEach((particle, i) => {
-        particle.x = 150;
-        particle.y = 150;
+      particles.value.forEach((particle) => {
+        particle.x = app.value!.renderer.width / 2;
+        particle.y = app.value!.renderer.height / 2;
         particle.alpha = 0;
         particle.visible = true;
         const angle = Math.random() * Math.PI * 2;
@@ -69,8 +68,8 @@ export default defineComponent({
           { alpha: 0 },
           {
             alpha: 1,
-            x: 150 + Math.cos(angle) * speed * 50,
-            y: 150 + Math.sin(angle) * speed * 50,
+            x: particle.x + Math.cos(angle) * speed * 50,
+            y: particle.y + Math.sin(angle) * speed * 50,
             duration: 2,
             ease: 'power1.out',
             repeat: -1,
@@ -109,10 +108,24 @@ export default defineComponent({
         }
       });
     };
+    
+    const setParticles = () => {
+      if (pixiContainer.value) {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        app.value = new PIXI.Application({ width, height, backgroundAlpha: 0 });
+        pixiContainer.value.appendChild(app.value.view);
+
+        createParticleTexture();
+        createParticles();
+      }
+    }
 
     watch(() => props.visible, (newVal) => {
       if (newVal) {
         nextTick(() => {
+          setParticles();
           animateModalContent();
           showParticles();
         });
@@ -124,15 +137,20 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      if (pixiContainer.value) {
-        app.value = new PIXI.Application({ width: 300, height: 300, transparent: true });
-        pixiContainer.value.appendChild(app.value.view);
-        createParticleTexture();
-        createParticles();
-      }
+      console.log("Mounted WinnerModal");
     });
 
-    return { modalContainer, modalContent, animatedText, pixiContainer, closeModal };
+    onUnmounted(() => {
+      app.value?.destroy(true, true);
+    });
+
+    return {
+      modalContainer,
+      modalContent,
+      animatedText,
+      pixiContainer,
+      closeModal,
+    };
   },
 });
 </script>
@@ -160,8 +178,6 @@ export default defineComponent({
   padding: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  transform: scale(0.5);
-  animation: popIn 0.6s forwards, bounce 1s infinite;
   width: 300px;
   position: relative;
 }
