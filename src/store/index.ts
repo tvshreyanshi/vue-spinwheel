@@ -27,7 +27,7 @@ const mutations: MutationTree<State> = {
   UpdateUserPoint(state, userName: string) {
     const user = state.gameUserList.find(user => user.name === userName);
     if (user) {
-      user.point += 3;
+      user.point += 2;
       localStorage.setItem('gameUserList', JSON.stringify(state.gameUserList))
     }
   },
